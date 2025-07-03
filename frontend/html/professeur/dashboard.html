@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Professeur - Gestion Universitaire</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <!-- <link rel="stylesheet" href="prof_style.css"> -->
+</head>
+<body id="professeur-dashboard">
+    <header>
+        <h1>Tableau de Bord Professeur</h1>
+        <nav>
+            <a href="../../index.html">Accueil Portail</a>
+            <a href="#mes-cours-prof">Mes Cours</a>
+            <a href="#gestion-notes">Gestion des Notes</a>
+            <a href="#gestion-contenu">Gestion du Contenu</a>
+            <a href="#messagerie-prof">Messagerie</a>
+            <button id="logoutButton" class="btn btn-danger">Déconnexion</button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="welcome-banner">
+            <h2>Bienvenue, Professeur <span id="professorName">[Nom Professeur]</span>!</h2>
+        </div>
+
+        <div id="message-area-global-prof" class="message-area"></div>
+
+        <section id="mes-cours-prof" class="dashboard-section">
+            <h3>Mes Cours Enseignés</h3>
+            <div id="professorCoursesList" class="dashboard-grid">
+                <!-- Les cartes de cours du professeur seront insérées ici -->
+                <p>Chargement de vos cours...</p>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section id="gestion-notes" class="dashboard-section">
+            <h3>Gestion des Notes</h3>
+            <div class="dashboard-card">
+                <label for="selectCourseForGrading">Sélectionner un cours pour la notation :</label>
+                <select id="selectCourseForGrading" class="form-control">
+                    <option value="">-- Choisissez un cours --</option>
+                    <!-- Options chargées dynamiquement -->
+                </select>
+                <div id="studentsListForGradingContainer" style="margin-top: 20px; display: none;">
+                    <h4>Étudiants inscrits au cours : <span id="selectedCourseNameGrading"></span></h4>
+                    <div class="table-container">
+                        <table class="data-table" id="studentsForGradingTable">
+                            <thead>
+                                <tr>
+                                    <th>Matricule</th>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Email</th>
+                                    <th>Action (Noter)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentsForGradingTableBody">
+                                <!-- Étudiants chargés ici -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Conteneur pour le graphique de distribution des notes -->
+                    <div id="gradeDistributionChartContainer" style="margin-top: 20px; display: none;">
+                        <h4>Distribution des Notes pour <span id="selectedCourseNameForChart"></span></h4>
+                        <canvas id="gradeDistributionChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal ou section pour la saisie de note -->
+        <div id="gradeEntryModal" class="modal" style="display:none;">
+            <div class="modal-content dashboard-card">
+                <span class="close-button" onclick="document.getElementById('gradeEntryModal').style.display='none'">&times;</span>
+                <h4>Saisir/Modifier Note pour <span id="modalStudentName"></span></h4>
+                <p>Cours: <span id="modalCourseName"></span></p>
+                <form id="gradeForm">
+                    <input type="hidden" id="modalStudentId">
+                    <input type="hidden" id="modalCourseId">
+                    <div class="form-group">
+                        <label for="anneeAcad">Année Académique:</label>
+                        <input type="text" id="anneeAcad" class="form-control" placeholder="ex: 2023-2024" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="semestre">Semestre:</label>
+                        <input type="text" id="semestre" class="form-control" placeholder="ex: S1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="typeEval">Type d'Évaluation:</label>
+                        <input type="text" id="typeEval" class="form-control" value="Examen Final" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="noteValeur">Note:</label>
+                        <input type="text" id="noteValeur" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="baremeMax">Barème Max (optionnel):</label>
+                        <input type="text" id="baremeMax" class="form-control" placeholder="ex: 20">
+                    </div>
+                    <div class="form-group">
+                        <label for="commentairesProf">Commentaires (optionnel):</label>
+                        <textarea id="commentairesProf" class="form-control"></textarea>
+                    </div>
+                     <div class="form-group">
+                        <label for="visibleEtudiant">
+                            <input type="checkbox" id="visibleEtudiant"> Rendre visible à l'étudiant
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-success">Enregistrer Note</button>
+                </form>
+                <div id="gradeFormMessage" class="message" style="display:none;"></div>
+            </div>
+        </div>
+
+
+        <hr class="section-divider">
+
+        <section id="gestion-contenu" class="dashboard-section">
+            <h3>Gestion du Contenu des Cours</h3>
+            <div class="dashboard-card">
+                <label for="selectCourseForContent">Sélectionner un cours pour gérer son contenu :</label>
+                <select id="selectCourseForContent" class="form-control">
+                     <option value="">-- Choisissez un cours --</option>
+                    <!-- Options chargées dynamiquement -->
+                </select>
+                <div id="courseContentManagementContainer" style="margin-top: 20px; display: none;">
+                    <h4>Contenu du cours : <span id="selectedCourseNameContent"></span></h4>
+                    <button id="addContentSectionButton" class="btn btn-primary" style="margin-bottom:15px;">Ajouter une Section</button>
+                    <div id="courseContentList" class="accordion">
+                        <!-- Sections de contenu chargées ici -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal ou section pour ajouter/modifier du contenu de cours -->
+        <div id="contentSectionModal" class="modal" style="display:none;">
+             <div class="modal-content dashboard-card">
+                <span class="close-button" onclick="document.getElementById('contentSectionModal').style.display='none'">&times;</span>
+                <h4 id="contentModalTitle">Ajouter/Modifier Section de Contenu</h4>
+                <form id="contentSectionForm">
+                    <input type="hidden" id="contentModalCourseId">
+                    <input type="hidden" id="contentModalSectionId"> <!-- Pour la modification -->
+                    <div class="form-group">
+                        <label for="sectionTitle">Titre de la Section:</label>
+                        <input type="text" id="sectionTitle" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sectionHtmlContent">Contenu HTML:</label>
+                        <textarea id="sectionHtmlContent" class="form-control" rows="5"></textarea>
+                        <!-- Pour un vrai éditeur HTML, utiliser une lib comme TinyMCE ou CKEditor -->
+                    </div>
+                    <div class="form-group">
+                        <label for="sectionOrder">Ordre (optionnel):</label>
+                        <input type="number" id="sectionOrder" class="form-control">
+                    </div>
+                    <!-- Gestion des fichiers joints (simplifiée pour l'instant) -->
+                    <div class="form-group">
+                        <label>Fichiers Joints (URLs directes pour la démo):</label>
+                        <div id="fileAttachmentsContainer">
+                            <!-- Inputs pour fichiers ici, ou affichage des fichiers existants -->
+                        </div>
+                        <button type="button" id="addFileAttachmentField" class="btn btn-info btn-sm">Ajouter un Fichier Joint</button>
+                    </div>
+                    <button type="submit" class="btn btn-success">Enregistrer Section</button>
+                </form>
+                <div id="contentFormMessage" class="message" style="display:none;"></div>
+            </div>
+        </div>
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Université Fictive. Tous droits réservés.</p>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script src="../../js/professeur_dashboard.js"></script>
+</body>
+</html>
