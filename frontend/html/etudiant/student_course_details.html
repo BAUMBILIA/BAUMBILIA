@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du Cours - Gestion Universitaire</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body id="etudiant-course-details">
+    <header>
+        <h1><span id="courseNameTitle">[Nom du Cours]</span></h1>
+        <nav>
+            <a href="dashboard.html">Mon Tableau de Bord</a>
+            <button id="logoutButton" class="btn btn-danger">Déconnexion</button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="course-info-banner dashboard-card">
+            <h2><span id="courseName">[Nom du Cours]</span> (<span id="courseCode">[Code Cours]</span>)</h2>
+            <p id="courseDescription">[Description du cours]</p>
+        </div>
+
+        <div id="message-area-course" class="message-area"></div>
+
+        <section id="course-content-section" class="dashboard-section">
+            <h3>Contenu du Cours</h3>
+            <div id="courseContentAccordion" class="accordion">
+                <!-- Les sections du cours seront insérées ici par JavaScript -->
+                <p class="text-center">Chargement du contenu du cours...</p>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section id="course-chatbot-section" class="dashboard-section">
+            <h3>Questions sur ce Cours ?</h3>
+            <div class="dashboard-card">
+                <div id="chatbotMessages" style="height: 200px; overflow-y: auto; border: 1px solid #eee; padding: 10px; margin-bottom: 10px; border-radius: 4px; background: #f9f9f9;">
+                    <!-- Les messages du chat s'afficheront ici -->
+                    <div class="bot-message">Bonjour ! Posez-moi une question sur le contenu de ce cours.</div>
+                </div>
+                <div style="display: flex;">
+                    <input type="text" id="chatbotInput" class="form-control" placeholder="Votre question..." style="flex-grow: 1; margin-right: 10px;">
+                    <button id="chatbotSendButton" class="btn btn-primary">Envoyer</button>
+                </div>
+                <div id="chatbotLoading" style="display:none; margin-top:5px;"><small><i>L'assistant réfléchit...</i></small></div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Université Fictive. Tous droits réservés.</p>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script src="../../js/student_course_details.js"></script>
+</body>
+</html>
