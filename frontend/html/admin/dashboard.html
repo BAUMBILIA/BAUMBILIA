@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Gestion Universitaire</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <!-- <link rel="stylesheet" href="admin_style.css"> -->
+</head>
+<body id="admin-dashboard">
+    <header>
+        <h1>Tableau de Bord Administrateur</h1>
+        <nav>
+            <a href="../../index.html">Accueil Portail</a>
+            <a href="#manage-users-section">Utilisateurs</a>
+            <a href="#manage-programs-section">Filières</a>
+            <a href="#manage-courses-section">Cours</a>
+            <a href="#manage-enrollments-section">Inscriptions</a>
+            <button id="logoutButton" class="btn btn-danger">Déconnexion</button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="welcome-banner">
+            <h2>Bienvenue, Administrateur <span id="adminName">[Nom Admin]</span>!</h2>
+        </div>
+        <div id="message-area-global-admin" class="message-area"></div>
+
+        <!-- Section Gestion des Utilisateurs -->
+        <section id="manage-users-section" class="dashboard-section">
+            <h3>Gestion des Utilisateurs</h3>
+            <div class="dashboard-card">
+                <button id="showAddUserModalBtn" class="btn btn-success" style="margin-bottom:15px;">Ajouter Utilisateur</button>
+                <div class="filters">
+                    <label for="filterUserRole">Filtrer par rôle:</label>
+                    <select id="filterUserRole" class="form-control-sm">
+                        <option value="">Tous</option>
+                        <option value="etudiant">Étudiant</option>
+                        <option value="professeur">Professeur</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <button id="applyUserFilters" class="btn btn-sm btn-primary">Filtrer</button>
+                </div>
+                <div class="table-container">
+                    <table class="data-table" id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Email</th>
+                                <th>Rôle</th>
+                                <th>Matricule/ID Prof</th>
+                                <th>Actif</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <hr class="section-divider">
+
+        <!-- Section Gestion des Filières -->
+        <section id="manage-programs-section" class="dashboard-section">
+            <h3>Gestion des Filières</h3>
+            <div class="dashboard-card">
+                <button id="showAddProgramModalBtn" class="btn btn-success" style="margin-bottom:15px;">Ajouter Filière</button>
+                <div class="table-container">
+                    <table class="data-table" id="programsTable">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Code</th>
+                                <th>Département</th>
+                                <th>Niveaux</th>
+                                <th>Responsable</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="programsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <hr class="section-divider">
+
+        <!-- Section Gestion des Cours -->
+        <section id="manage-courses-section" class="dashboard-section">
+            <h3>Gestion des Cours</h3>
+            <div class="dashboard-card">
+                <button id="showAddCourseModalBtn" class="btn btn-success" style="margin-bottom:15px;">Ajouter Cours</button>
+                 <div class="table-container">
+                    <table class="data-table" id="coursesTable">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Code</th>
+                                <th>Niveau</th>
+                                <th>Semestre</th>
+                                <th>Professeur Assigné</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="coursesTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <hr class="section-divider">
+
+        <!-- Section Gestion des Inscriptions -->
+        <section id="manage-enrollments-section" class="dashboard-section">
+            <h3>Gestion des Inscriptions Étudiants aux Cours</h3>
+            <div class="dashboard-card">
+                <form id="enrollmentForm" class="form-inline">
+                    <div class="form-group">
+                        <label for="enrollStudentSelect">Étudiant:</label>
+                        <select id="enrollStudentSelect" class="form-control" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="enrollCourseSelect">Cours:</label>
+                        <select id="enrollCourseSelect" class="form-control" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="enrollAnneeAcad">Année Acad.:</label>
+                        <input type="text" id="enrollAnneeAcad" class="form-control" placeholder="2023-2024" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="enrollSemestre">Semestre:</label>
+                        <input type="text" id="enrollSemestre" class="form-control" placeholder="S1" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Inscrire Étudiant</button>
+                </form>
+                <p><small>Pour désinscrire, voir la liste des cours d'un étudiant ou les étudiants d'un cours et agir depuis là (non implémenté dans cette UI simplifiée).</small></p>
+            </div>
+        </section>
+        <hr class="section-divider">
+
+        <!-- Section Statistiques Admin -->
+        <section id="admin-stats-section" class="dashboard-section">
+            <h3>Statistiques Générales</h3>
+            <div class="dashboard-card">
+                <h4>Nombre d'Inscrits par Filière</h4>
+                <div id="enrollmentByProgramChartContainer" style="height: 300px;">
+                     <canvas id="enrollmentByProgramChart"></canvas>
+                </div>
+            </div>
+            <!-- D'autres graphiques pourraient être ajoutés ici -->
+        </section>
+
+    </main>
+
+    <!-- Modals pour Admin (Utilisateur, Filière, Cours) -->
+    <!-- User Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeUserModalBtn">&times;</span>
+            <h4 id="userModalTitle">Ajouter/Modifier Utilisateur</h4>
+            <form id="userForm">
+                <input type="hidden" id="userId">
+                <div class="form-group">
+                    <label for="userNom">Nom:</label><input type="text" id="userNom" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPrenom">Prénom:</label><input type="text" id="userPrenom" required>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Email:</label><input type="email" id="userEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPassword">Mot de passe (laisser vide pour ne pas changer):</label><input type="password" id="userPassword">
+                </div>
+                <div class="form-group">
+                    <label for="userRole">Rôle:</label>
+                    <select id="userRole" required>
+                        <option value="etudiant">Étudiant</option>
+                        <option value="professeur">Professeur</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div id="etudiantFields" class="role-specific-fields" style="display:none;">
+                    <div class="form-group"><label for="userMatricule">Matricule Étudiant:</label><input type="text" id="userMatricule"></div>
+                    <div class="form-group"><label for="userFiliere">Filière:</label><select id="userFiliere"></select></div>
+                    <div class="form-group"><label for="userNiveau">Niveau (L1, M2..):</label><input type="text" id="userNiveau"></div>
+                </div>
+                <div id="professeurFields" class="role-specific-fields" style="display:none;">
+                    <div class="form-group"><label for="userMatriculeProf">Matricule Professeur (optionnel):</label><input type="text" id="userMatriculeProf"></div>
+                    <!-- Champ pour département_ids (multi-select ou similaire) à ajouter si besoin -->
+                </div>
+                 <div class="form-group">
+                    <label><input type="checkbox" id="userActif" checked> Actif</label>
+                </div>
+                <button type="submit" class="btn btn-success">Enregistrer</button>
+            </form>
+            <div id="userFormMessage" class="message" style="display:none;"></div>
+        </div>
+    </div>
+
+    <!-- Program (Filière) Modal -->
+    <div id="programModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeProgramModalBtn">&times;</span>
+            <h4 id="programModalTitle">Ajouter/Modifier Filière</h4>
+            <form id="programForm">
+                <input type="hidden" id="programId">
+                <div class="form-group"><label for="programNom">Nom:</label><input type="text" id="programNom" required></div>
+                <div class="form-group"><label for="programCode">Code Filière (optionnel):</label><input type="text" id="programCode"></div>
+                <div class="form-group"><label for="programDescription">Description:</label><textarea id="programDescription" rows="3"></textarea></div>
+                <div class="form-group"><label for="programDepartement">Département:</label><input type="text" id="programDepartement"></div>
+                <div class="form-group"><label for="programNiveaux">Niveaux Offerts (ex: L1,L2,M1):</label><input type="text" id="programNiveaux" placeholder="Séparés par virgule"></div>
+                <div class="form-group"><label for="programResponsable">Responsable (Professeur ID, optionnel):</label><select id="programResponsable"></select></div>
+                <button type="submit" class="btn btn-success">Enregistrer</button>
+            </form>
+            <div id="programFormMessage" class="message" style="display:none;"></div>
+        </div>
+    </div>
+
+    <!-- Course Modal -->
+    <div id="courseModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeCourseModalBtn">&times;</span>
+            <h4 id="courseModalTitle">Ajouter/Modifier Cours</h4>
+            <form id="courseForm">
+                <input type="hidden" id="courseId">
+                <div class="form-group"><label for="courseTitre">Titre:</label><input type="text" id="courseTitre" required></div>
+                <div class="form-group"><label for="courseCode">Code Cours:</label><input type="text" id="courseCode" required></div>
+                <div class="form-group"><label for="courseDescription">Description:</label><textarea id="courseDescription" rows="3"></textarea></div>
+                <div class="form-group"><label for="courseCredits">Crédits:</label><input type="number" id="courseCredits" required></div>
+                <div class="form-group"><label for="courseNiveau">Niveau (L1, M2..):</label><input type="text" id="courseNiveau" required></div>
+                <div class="form-group"><label for="courseSemestre">Semestre (S1, S2..):</label><input type="text" id="courseSemestre" required></div>
+                <div class="form-group"><label for="courseFiliereIds">Filières (IDs, séparés par virgule):</label><select id="courseFiliereIds" multiple></select></div>
+                <div class="form-group"><label for="courseProfesseurId">Professeur Assigné (ID):</label><select id="courseProfesseurId"></select></div>
+                <!-- Prérequis à ajouter si besoin d'une UI plus complexe -->
+                <button type="submit" class="btn btn-success">Enregistrer</button>
+            </form>
+             <div id="courseFormMessage" class="message" style="display:none;"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Université Fictive. Tous droits réservés.</p>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script src="../../js/admin_dashboard.js"></script>
+</body>
+</html>
