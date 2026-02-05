@@ -1,0 +1,489 @@
+/* frontend/css/style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Assure que le body prend au moins toute la hauteur de la vue */
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    width: 100%;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+header nav {
+    margin-top: 0.5rem;
+}
+
+header nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    flex-grow: 1; /* Permet au main de prendre l'espace disponible */
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Styles spécifiques pour la page d'accueil (index.html) */
+#hero {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: #fff;
+    max-width: 900px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+#hero h2{
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    margin-top: auto; /* Pousse le footer en bas si le contenu est court */
+}
+
+/* Styles pour les formulaires (sera utile pour la connexion, etc.) */
+.form-container {
+    width: 100%;
+    max-width: 450px; /* Légèrement plus large */
+    margin: 2rem auto;
+    padding: 2.5rem; /* Plus de padding */
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* Ombre plus douce et diffuse */
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 2rem; /* Plus d'espace */
+    color: #333;
+    font-size: 1.8rem; /* Titre plus grand */
+}
+
+.form-group {
+    margin-bottom: 1.25rem; /* Un peu plus d'espace entre les groupes */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.6rem; /* Plus d'espace sous le label */
+    color: #444; /* Couleur de label légèrement plus foncée */
+    font-weight: 600; /* Label un peu plus gras */
+    font-size: 0.95rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.85rem; /* Padding un peu plus grand dans les champs */
+    border: 1px solid #ccc; /* Bordure légèrement plus visible */
+    border-radius: 5px; /* Coins légèrement plus arrondis */
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #007bff; /* Couleur de bordure au focus */
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); /* Effet de lueur au focus */
+    outline: none;
+}
+
+
+.form-group input[type="submit"],
+.btn {
+    display: inline-block;
+    background-color: #007bff; /* Bleu primaire Bootstrap */
+    color: white;
+    padding: 0.85rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out; /* Transition douce */
+}
+
+.form-group input[type="submit"] {
+    width: 100%; /* Bouton de soumission pleine largeur par défaut */
+}
+
+
+.btn-primary {
+    background-color: #007bff;
+}
+.btn-primary:hover {
+    background-color: #0056b3; /* Plus foncé au survol */
+}
+
+.btn-success {
+    background-color: #28a745; /* Vert Bootstrap */
+}
+.btn-success:hover {
+    background-color: #1e7e34;
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Rouge Bootstrap */
+}
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-info {
+    background-color: #17a2b8; /* Cyan Bootstrap */
+}
+.btn-info:hover {
+    background-color: #117a8b;
+}
+
+.btn-block { /* Pour que d'autres boutons .btn prennent toute la largeur */
+    width: 100%;
+    display: block;
+}
+
+
+/* Page de connexion spécifique */
+#login-page main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* min-height calculé par flex-grow: 1 sur main et min-height: 100vh sur body */
+}
+#login-page .form-container p {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+#login-page .form-container p a {
+    color: #007bff;
+    text-decoration: none;
+}
+#login-page .form-container p a:hover {
+    text-decoration: underline;
+}
+
+
+/* Messages d'alerte/feedback */
+.message-area { /* Conteneur pour les messages globaux */
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    width: auto;
+    max-width: 350px;
+}
+
+.alert-message {
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .3rem;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.alert-message.success {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+}
+
+.alert-message.error {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+}
+
+.alert-message.info {
+    color: #055160;
+    background-color: #cff4fc;
+    border-color: #b6effb;
+}
+
+/* Styles pour les tableaux (utiles pour les listes de notes, utilisateurs, etc.) */
+.table-container {
+    overflow-x: auto; /* Pour la responsivité sur petits écrans */
+    margin-top: 20px;
+    background-color: #fff;
+    padding:15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+table.data-table th, table.data-table td {
+    border: 1px solid #ddd;
+    padding: 10px 12px; /* Augmentation du padding */
+    text-align: left;
+    vertical-align: middle;
+}
+
+table.data-table th {
+    background-color: #f0f0f0; /* Fond plus clair pour les en-têtes */
+    font-weight: 600; /* Texte d'en-tête plus gras */
+    font-size:0.9rem;
+    text-transform: uppercase; /* Majuscules pour les en-têtes */
+    letter-spacing: 0.5px;
+}
+
+table.data-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Lignes alternées pour meilleure lisibilité */
+}
+
+table.data-table tbody tr:hover {
+    background-color: #f1f1f1; /* Survol des lignes */
+}
+
+/* Styles pour les Dashboards */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top:20px;
+}
+
+.dashboard-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dashboard-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #007bff;
+    font-size: 1.2rem;
+}
+
+.dashboard-card ul {
+    list-style: none;
+    padding: 0;
+}
+.dashboard-card ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+.dashboard-card ul li:last-child {
+    border-bottom: none;
+}
+.dashboard-card .btn { margin-top:10px; }
+
+/* Spécifique pour les dashboards dans html/admin, html/professeur, html/etudiant */
+#admin-dashboard main, #professeur-dashboard main, #etudiant-dashboard main {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Message div dans les formulaires (comme loginForm) */
+#loginForm .message, #registerForm .message { /* Cible plus spécifique */
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+#loginForm .message.success, #registerForm .message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+#loginForm .message.error, #registerForm .message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Pour les liens de déconnexion dans le header */
+header nav #logoutButton {
+    background-color: #dc3545; /* Rouge */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+header nav #logoutButton:hover {
+    background-color: #c82333;
+    text-decoration: none;
+}
+
+/* Styles pour l'accordéon (utilisé dans student_course_details.html) */
+.accordion {
+    margin-top: 20px;
+}
+.accordion-item {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    overflow: hidden; /* Pour que les coins arrondis s'appliquent bien */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.accordion-header {
+    background-color: #e9ecef; /* Couleur de fond plus claire et neutre */
+    color: #333;
+    cursor: pointer;
+    padding: 15px 20px; /* Padding ajusté */
+    width: 100%;
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid #ddd; /* Séparateur subtil */
+    outline: none;
+    transition: background-color 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.accordion-header:hover {
+    background-color: #dcdfe2;
+}
+.accordion-header.active { /* Style quand l'accordéon est ouvert */
+    background-color: #007bff; /* Bleu pour indiquer l'activité */
+    color: white;
+    border-bottom-color: #0056b3;
+}
+.accordion-panel {
+    padding: 20px; /* Plus de padding pour le contenu */
+    background-color: white;
+    display: none; /* Caché par défaut, JS gère l'affichage */
+    border: 1px solid #ddd;
+    border-top: none; /* Le header a déjà une bordure inférieure */
+}
+.accordion-panel .content-html img { /* S'assurer que les images dans le contenu sont responsives */
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px; /* Coins arrondis pour les images aussi */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.accordion-panel h4 { /* Style pour les sous-titres dans le panel, ex: "Fichiers Joints" */
+    margin-top: 15px;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #555;
+}
+.accordion-panel ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+.accordion-panel ul li a {
+    color: #007bff;
+    text-decoration: none;
+}
+.accordion-panel ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Styles pour les Modals */
+.modal {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Reste en place lors du défilement */
+    z-index: 1000; /* Au-dessus de tout le reste */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Permet le défilement si le contenu est trop grand */
+    background-color: rgba(0,0,0,0.5); /* Fond semi-transparent */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* Centré verticalement (environ) et horizontalement */
+    padding: 25px;
+    border: 1px solid #888;
+    width: 80%; /* Largeur du modal */
+    max-width: 600px; /* Largeur maximale */
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.modal-content h4 { /* Titre du modal */
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Pour les formulaires dans les modaux */
+.modal-content .form-group {
+    margin-bottom: 1rem;
+}
+.modal-content .form-control { /* Assurer que les inputs dans les modaux prennent la bonne largeur */
+    width: 100%;
+    box-sizing: border-box;
+}
+.modal-content .message { /* Messages d'erreur/succès dans le modal */
+    margin-top: 15px;
+}
+
+/* Spécifique pour le conteneur de fichiers joints dans le modal de contenu */
+#fileAttachmentsContainer .file-attachment-field {
+    padding: 10px;
+    border: 1px dashed #eee;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+#fileAttachmentsContainer .file-attachment-field input {
+    margin-bottom: 5px !important; /* Forcer un peu d'espace */
+}
