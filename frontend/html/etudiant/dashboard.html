@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Étudiant - Gestion Universitaire</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <!-- Potentiellement un CSS spécifique au dashboard étudiant -->
+    <!-- <link rel="stylesheet" href="etudiant_style.css"> -->
+</head>
+<body id="etudiant-dashboard">
+    <header>
+        <h1>Tableau de Bord Étudiant</h1>
+        <nav>
+            <a href="../../index.html">Accueil Portail</a>
+            <a href="#mes-notes">Mes Notes</a>
+            <a href="#mes-cours">Mes Cours</a>
+            <a href="#messagerie">Messagerie</a> <!-- Lien vers une future page de messagerie -->
+            <button id="logoutButton" class="btn btn-danger">Déconnexion</button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="welcome-banner">
+            <h2>Bienvenue, <span id="studentName">[Prénom Étudiant]</span>!</h2>
+            <p>Matricule: <span id="studentMatricule">[Matricule]</span> | Filière: <span id="studentFiliere">[Filière]</span> - <span id="studentNiveau">[Niveau]</span></p>
+        </div>
+
+        <div id="message-area-global" class="message-area"></div> <!-- Zone pour les messages globaux du dashboard -->
+
+        <section id="mes-notes" class="dashboard-section">
+            <h3>Mes Notes</h3>
+            <div class="filters">
+                <label for="filterAnneeNotes">Année Académique:</label>
+                <select id="filterAnneeNotes">
+                    <!-- Options chargées dynamiquement -->
+                    <option value="">Toutes</option>
+                </select>
+                <label for="filterSemestreNotes">Semestre:</label>
+                <select id="filterSemestreNotes">
+                    <option value="">Tous</option>
+                    <!-- Options S1, S2, etc. -->
+                </select>
+                <button id="applyGradeFilters" class="btn btn-primary">Filtrer</button>
+            </div>
+            <div id="gradesSummary" class="dashboard-card">
+                <h4>Résumé des Notes</h4>
+                <p>Moyenne Générale (calculée): <strong id="moyenneGenerale">N/A</strong></p>
+                <!-- Plus de stats ici -->
+            </div>
+            <div id="gradesTableContainer" class="table-container">
+                <table class="data-table" id="studentGradesTable">
+                    <thead>
+                        <tr>
+                            <th>Code Cours</th>
+                            <th>Titre du Cours</th>
+                            <th>Année Acad.</th>
+                            <th>Semestre</th>
+                            <th>Type Éval.</th>
+                            <th>Note</th>
+                            <th>Barème</th>
+                            <th>Commentaires</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentGradesTableBody">
+                        <!-- Les lignes de notes seront insérées ici par JavaScript -->
+                        <tr><td colspan="8" class="text-center">Chargement des notes...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="gradesChartContainer" class="dashboard-card" style="margin-top: 20px;">
+                <h4>Évolution des Notes (Exemple)</h4>
+                <canvas id="gradesChart" width="400" height="200"></canvas>
+                <p class="text-center small-text">Un graphique de l'évolution de vos moyennes par semestre pourrait être affiché ici.</p>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section id="mes-cours" class="dashboard-section">
+            <h3>Mes Cours Inscrits</h3>
+            <div id="studentCoursesList" class="dashboard-grid">
+                <!-- Les cartes de cours seront insérées ici par JavaScript -->
+                <p>Chargement des cours...</p>
+            </div>
+        </section>
+
+        <!-- Section Messagerie (placeholder) -->
+        <hr class="section-divider">
+        <section id="messagerie-preview" class="dashboard-section">
+            <h3>Messagerie Récente</h3>
+            <div id="recentMessages" class="dashboard-card">
+                <p>Aucun nouveau message pour le moment.</p>
+                <a href="../messagerie/inbox.html" class="btn btn-info">Accéder à la Messagerie</a>
+                <!--  Prévoir une page frontend/html/messagerie/inbox.html etc. -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Université Fictive. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Inclure Chart.js si on l'utilise pour les graphiques -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../js/main.js"></script> <!-- Fonctions globales, gestion du token, logout -->
+    <script src="../../js/etudiant_dashboard.js"></script>
+</body>
+</html>
