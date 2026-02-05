@@ -1,0 +1,60 @@
+# Fichiers et dossiers à ignorer lors de la construction de l'image Docker
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+pip-log.txt
+pip-delete-this-directory.txt
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE / OS specific
+.vscode/
+.idea/
+.project
+.settings/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Git
+.git/
+.gitignore
+
+# Environnement local (si utilisé)
+.env
+
+# Tests (si pas nécessaires dans l'image de prod)
+# backend/tests/
+# htmlcov/
+# .coverage
+# coverage.xml
+
+# Autres
+# node_modules/ (si on avait du JS buildé côté serveur, ce qui n'est pas le cas ici)
+# frontend/ (si le frontend est construit et servi séparément par Nginx/CDN)
+# Pour l'instant, notre Dockerfile ne copie pas le frontend, donc pas besoin de l'ignorer explicitement ici,
+# mais c'est une bonne pratique de le lister si on changeait d'avis.
+# frontend/
+
+# Logs
+*.log
+
+# Fichiers de base de données locaux (si utilisés en dev)
+*.sqlite3
+*.db
+database/ # Si ce dossier contient des db locales ou des fichiers temporaires non nécessaires en prod.
+          # Actuellement, il est vide ou pour des scripts.
+```

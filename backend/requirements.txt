@@ -1,0 +1,14 @@
+Flask==2.2.2 # Ou une version plus récente
+Werkzeug<3.0 # Required for Flask 2.2.2
+Flask-PyMongo==2.3.0 # Ou une version plus récente
+python-dotenv==0.21.0 # Ou une version plus récente
+Flask-Bcrypt==1.0.1 # Pour le hachage des mots de passe
+Flask-JWT-Extended==4.4.4 # Pour l'authentification JWT
+PyJWT<2.10 # Required to avoid strict subject type check in newer versions
+groq==0.4.1 # SDK Python pour Groq
+Flask-Mail==0.9.1 # Si on utilise Flask-Mail pour les emails
+gunicorn==21.2.0 # Serveur WSGI pour la production
+
+# Ajoutez d'autres dépendances au fur et à mesure des besoins:
+# requests (pour des appels API externes si besoin)
+# pymongo (si on n'utilise pas Flask-PyMongo directement partout)
